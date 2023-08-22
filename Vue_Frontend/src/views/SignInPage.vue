@@ -9,6 +9,9 @@
               <div class="text-grey-8">
                 Sign In below to access your account
               </div>
+              <div class="q-mt-md text-center">
+                <GoogleLogin :callback="callback" prompt />
+              </div>
             </q-card-section>
             <q-card-section>
               <q-input
@@ -80,11 +83,10 @@
 import { useRouter } from "vue-router";
 const router = useRouter();
 import { useQuasar } from "quasar";
-import { useForm } from "vee-validate";
-import * as yup from "yup";
 import axios from "axios";
 import { ref } from "vue";
 const passwordVisible = ref(false);
+import { decodeCredential } from "vue3-google-login";
 const $q = useQuasar();
 import {
   required,
@@ -96,13 +98,36 @@ const password = ref("");
 const togglePasswordVisibility = () => {
   passwordVisible.value = !passwordVisible.value;
 };
-
+const callback = async (response) => {
+  const userData = decodeCredential(response.credential);
+  const { email, name, picture } = userData;
+  try {
+    const res = await axios.post("http://localhost:4000/api/googleSignIn", {
+      email,
+      name,
+      picture,
+    });
+    if (res.status === 201) {
+      const token = res.data.token;
+      localStorage.setItem("_token", token);
+      $q.notify({
+        type: "positive",
+        message: "Sign in successfull!",
+      });
+      router.push({ name: "Home" });
+    }
+  } catch (error) {
+    $q.notify({
+      type: "negative",
+      message: "Not Verify",
+    });
+  }
+};
 const onSubmit = async () => {
   const UserDetails = {
     email: email.value,
     password: password.value,
   };
-  console.log(UserDetails);
   try {
     const res = await axios.post(
       "http://localhost:4000/api/SignIn",

@@ -29,8 +29,9 @@ const signUp = async (req, res) => {
 
 const SignIn = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const query = { email: email, password: password };
+    const { email } = req.body;
+    console.log(email);
+    const query = { email: email };
     const userExits = await User.findOne(query);
     const token = signToken(userExits);
     if (userExits) {
@@ -45,6 +46,59 @@ const SignIn = async (req, res) => {
       });
     }
   } catch (err) {
+    res.status(500).json({
+      message: err.message,
+      error: err,
+    });
+  }
+};
+const googleSignUp = async (req, res) => {
+  try {
+    const userExits = await User.findOne({ email });
+    const token = signToken(userExits);
+    if (userExits) {
+      return res.status(201).json({
+        token,
+        status: 201,
+        message: "User sign In successfullyyyyyy",
+      });
+    } else {
+      await User.create(req.body);
+      res.status(400).json({
+        message: "Create signUp Before signIn ",
+      });
+    }
+  } catch (err) {
+    console.log("not match");
+    res.status(500).json({
+      message: err.message,
+      error: err,
+    });
+  }
+};
+const googleSignIn = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const userExits = await User.findOne({ email });
+    const token = signToken(userExits);
+    if (userExits) {
+      return res.status(201).json({
+        token,
+        status: 201,
+        message: "User sign In successfullyyyyyy",
+      });
+    } else {
+      await User.create(req.body);
+      const userExits = await User.findOne({ email });
+      const token = signToken(userExits);
+      return res.status(201).json({
+        token,
+        status: 201,
+        message: "User sign In successfullyyyyyy",
+      });
+    }
+  } catch (err) {
+    console.log("not match");
     res.status(500).json({
       message: err.message,
       error: err,
@@ -165,4 +219,6 @@ module.exports = {
   changePassword,
   otpverify,
   getUser,
+  googleSignIn,
+  googleSignUp,
 };

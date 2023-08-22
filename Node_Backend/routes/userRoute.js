@@ -7,11 +7,14 @@ const {
   changePassword,
   otpverify,
   getUser,
+  googleSignIn,
+  googleSignUp,
 } = require("../controllers/User");
 
 router.post("/signUp", signUp);
 router.post("/SignIn", SignIn);
-router.get("/getUser", getUser);
+router.post("/googleSignIn", googleSignIn);
+router.get("/_me", getUser);
 router.post("/email-send", emailSend);
 router.post("/otp-send", otpverify);
 router.post("/change-password", changePassword);

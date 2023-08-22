@@ -6,6 +6,9 @@
           <q-card-section class="text-center">
             <div class="text-primary text-h5 text-weight-bold">Sign Up</div>
             <div class="text-grey-8">Sign Up below to access your account</div>
+            <div class="q-mt-md text-center">
+              <GoogleLogin :callback="callback" prompt />
+            </div>
           </q-card-section>
           <q-card-section>
             <q-input
@@ -63,6 +66,7 @@ import { useQuasar } from "quasar";
 import axios from "axios";
 import { useRouter } from "vue-router";
 const router = useRouter();
+import { decodeCredential } from "vue3-google-login";
 import { ref } from "vue";
 import {
   required,
@@ -72,16 +76,37 @@ import {
 const name = ref("");
 const email = ref("");
 const password = ref("");
-
 const $q = useQuasar();
-
+const callback = async (response) => {
+  const userData = decodeCredential(response.credential);
+  const { email, name } = userData;
+  try {
+    const res = await axios.post("http://localhost:4000/api/googleSignIn", {
+      email,
+      name,
+    });
+    if (res.status === 201) {
+      const token = res.data.token;
+      localStorage.setItem("_token", token);
+      $q.notify({
+        type: "positive",
+        message: "Sign in successfull!",
+      });
+      router.push({ name: "Home" });
+    }
+  } catch (error) {
+    $q.notify({
+      type: "negative",
+      message: "Not Verify",
+    });
+  }
+};
 const getUserData = async () => {
   const UserDetails = {
     name: name.value, // Make sure these variables are defined and hold user input
     email: email.value,
     password: password.value,
   };
-
   try {
     const res = await axios.post(
       "http://localhost:4000/api/SignUp",

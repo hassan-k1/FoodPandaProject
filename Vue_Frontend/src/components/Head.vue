@@ -10,12 +10,12 @@
         </router-link>
       </q-toolbar-title>
       <q-avatar class="cursor-pointer" v-if="user.userdata.name != null">
-        <img src="https://cdn.quasar.dev/img/avatar.png" style="height: 33px" />
+        <img :src="user.userdata.picture" style="height: 33px" />
         <q-menu transition-show="scale" transition-hide="scale">
           <q-list style="width: 225px">
             <q-item clickable>
               <img
-                src="https://cdn.quasar.dev/img/avatar.png"
+                :src="user.userdata.picture"
                 style="height: 33px; border-radius: 14px"
               />
               <div class="column">

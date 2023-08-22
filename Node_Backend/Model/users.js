@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: [true, "please provide your password"],
   },
+  picture: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);

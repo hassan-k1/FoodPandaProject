@@ -22,12 +22,9 @@ export const useDetailStore = defineStore("userStore", {
         };
 
         try {
-          const response = await axios.get(
-            "http://localhost:4000/api/getUser",
-            {
-              headers,
-            }
-          );
+          const response = await axios.get("http://localhost:4000/api/_me", {
+            headers,
+          });
           if (response.status === 201) {
             const userData = response.data.data.user;
             this.user = userData;
