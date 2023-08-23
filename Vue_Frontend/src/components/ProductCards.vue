@@ -38,12 +38,8 @@
                 label="Add"
                 @click="data.addToCart(item)"
               />
-              <router-link :to="`product/${item.id}`">
-                <q-btn
-                  class="bg-primary text-white"
-                  label="View"
-                  @click="data.specificProduct(item)"
-                />
+              <router-link :to="`product/${item._id}`">
+                <q-btn class="bg-primary text-white" label="View" />
               </router-link>
             </div>
           </q-card>

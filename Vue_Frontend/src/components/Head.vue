@@ -10,7 +10,20 @@
         </router-link>
       </q-toolbar-title>
       <q-avatar class="cursor-pointer" v-if="user.userdata.name != null">
-        <img :src="user.userdata.picture" style="height: 33px" />
+        <div v-if="user.userdata.picture">
+          <img
+            :src="user.userdata.picture"
+            style="height: 33px"
+            alt="user-profile"
+          />
+        </div>
+        <div style="border-radius: 1rem" v-else>
+          <img
+            src="https://housingconference.uli.org/wp-content/themes/uli-conference-3/img/no-speaker-image.png"
+            style="height: 30px"
+            alt="user-profile"
+          />
+        </div>
         <q-menu transition-show="scale" transition-hide="scale">
           <q-list style="width: 225px">
             <q-item clickable>
