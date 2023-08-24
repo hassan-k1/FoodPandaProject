@@ -1,21 +1,23 @@
 const Product = require("../Model/product");
 
 const getAllProducts = async (req, res) => {
-  Product.find()
-    .then((r) => {
-      res.status(200).json(r);
-    })
-    .catch((err) => {
-      res.status(400).send("error=>", err);
+  try {
+    const { id } = req.params;
+    const query = { restaurant: id };
+    const products = await Product.find(query);
+    res.status(200).json(products);
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+      error: err,
     });
+  }
 };
 const specific_product = async (req, res) => {
   try {
     const { id } = req.body;
     const query = { _id: id };
-    console.log(query);
     const specificproduct = await Product.findOne(query);
-    console.log(specificproduct);
     if (specificproduct) {
       return res.status(201).json({
         status: 201,

@@ -20,7 +20,8 @@
       img-src="https://asia-public.foodpanda.com/marketing/production/sg/images/nl/Head%20Banner.png"
     />
   </q-carousel>
-  <ProductCard />
+  <RestaurantsCard />
+  <!-- <ProductCard /> -->
 
   <div class="q-pa-xl q-gutter-sm">
     <h4 class="text-weight-thin">Put us in your pocket</h4>
@@ -52,7 +53,8 @@
 
 <script setup>
 import { useDetailStore } from "../stores/userDetailStore";
-import ProductCard from "../components/ProductCards.vue";
+// import ProductCard from "../components/ProductCards.vue";
+import RestaurantsCard from "../components/RestaurantCards.vue";
 import { onMounted, ref } from "vue";
 let slide = ref(1);
 let autoplay = ref(false);

@@ -8,6 +8,7 @@ import SignInPage from "../views/SignInPage.vue";
 import EmailVerify from "../views/VerifyemailPage.vue";
 import OtpVerify from "../views/OtpVerifyPage.vue";
 import ChangePass from "../views/ChangePaswordPage.vue";
+import Product from "../views/ProductPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +57,10 @@ const router = createRouter({
           component: checkin,
         },
         {
+          path: "restaurant/:id",
+          component: Product,
+        },
+        {
           path: "product/:id",
           name: "product",
           component: ProductDetail,
@@ -66,7 +71,6 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // const noAuthRoutes = ["signin", "signup"];
   const token = localStorage.getItem("_token");
   if (to.meta.requiresAuth) {
     if (token) {
@@ -76,7 +80,6 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     if (token) {
-      // if (noAuthRoutes.includes(to.name)) {
       next("/");
     } else {
       next();

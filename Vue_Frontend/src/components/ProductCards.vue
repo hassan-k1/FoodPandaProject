@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="text-weight-thin q-mx-lg q-px-sm">Restaurants</h2>
+    <h2 class="text-weight-thin q-mx-lg q-px-sm">Menu</h2>
     <div class="row">
       <div
         class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 flex flex justify-center q-mt-md"
@@ -23,7 +23,6 @@
         <div v-else>
           <q-card class="my-card">
             <img :src="item.image" />
-
             <q-card-section class="row justify-between">
               <div class="text-subtitle2">{{ item.name }}</div>
               <div class="text-subtitle2">${{ item.price }}</div>
@@ -38,7 +37,7 @@
                 label="Add"
                 @click="data.addToCart(item)"
               />
-              <router-link :to="`product/${item._id}`">
+              <router-link :to="`/product/${item._id}`">
                 <q-btn class="bg-primary text-white" label="View" />
               </router-link>
             </div>
@@ -52,24 +51,20 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useAddCartStore } from "../stores/AddCartStore";
-// import { products } from "../data/Products.js";
+import { useRoute } from "vue-router";
+import axios from "axios";
 const data = useAddCartStore();
+const route = useRoute();
+const productId = ref(route.params.id);
 
 let productdata = ref([]);
 let loading = ref(true);
 
 onMounted(async () => {
-  // try {
-  // Perform the fetch request
-  const response = await fetch("http://localhost:4000/api/products");
-  const data = await response.json();
-
-  productdata.value = data;
-  // loading.value = false;
-  // } catch (error) {
-  //   console.error("Error fetching data:", error);
-  //   // loading.value = false;
-  // }
+  const response = await axios.get(
+    `http://localhost:4000/api/products/${productId.value}`
+  );
+  productdata.value = response.data;
 });
 
 setTimeout(() => {
