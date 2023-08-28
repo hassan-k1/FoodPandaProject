@@ -13,21 +13,39 @@
   >
     <q-carousel-slide
       :name="1"
-      img-src="https://asia-public.foodpanda.com/marketing/production/sg/images/nl/Banner%201.png?v=1462963465"
+      img-src="https://fab.ph/wp-content/uploads/2021/05/fp2.jpg"
     />
     <q-carousel-slide
       :name="2"
-      img-src="https://asia-public.foodpanda.com/marketing/production/sg/images/nl/Head%20Banner.png"
+      img-src="https://careers.foodpanda.com/wp-content/uploads/2020/03/APAC_Recruitment-Marketing_Recrutiter_LinkedIn-Cover_FGD-22219_v05UN_Pink.png"
     />
   </q-carousel>
+  <!-- <div class="row">
+    <div
+      class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 flex items-center"
+    >
+      <div class="text-h4 text-weight-bolder text-secondary q-ml-xl">
+        It's the food and groceries you love, <br />
+        delivered
+      </div>
+    </div>
+    <div
+      class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 "
+    >
+      <img
+        src="https://images.deliveryhero.io/image/foodpanda/homepage/refresh-hero-home-pk.png?width=1264"
+        alt="image"
+        width="100%"
+      />
+    </div>
+  </div> -->
   <RestaurantsCard />
-  <!-- <ProductCard /> -->
 
   <div class="q-pa-xl q-gutter-sm">
     <h4 class="text-weight-thin">Put us in your pocket</h4>
     <q-banner rounded class="bg-primary text-white q-pa-lg">
       <div class="row">
-        <div class="col-lg-6 q-px-md">
+        <div class="col-lg-6 col-md-12 col-sm-12 q-px-md">
           <h5 class="text-weight-bold">
             Download the food and groceries you love
           </h5>
@@ -37,7 +55,7 @@
             first bite last. Go ahead, download us.
           </p>
         </div>
-        <div class="col-lg-6 relative-position">
+        <div class="col-lg-6 col-md-12 col-sm-12 relative-position">
           <div class="absolute flex justify-center" style="top: -100px">
             <img
               src="../assets/newsletter.webp"
@@ -53,7 +71,6 @@
 
 <script setup>
 import { useDetailStore } from "../stores/userDetailStore";
-// import ProductCard from "../components/ProductCards.vue";
 import RestaurantsCard from "../components/RestaurantCards.vue";
 import { onMounted, ref } from "vue";
 let slide = ref(1);

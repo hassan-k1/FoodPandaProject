@@ -8,7 +8,7 @@
       >
         <div v-if="loading">
           <q-card flat bordered style="max-width: 290px">
-            <q-skeleton height="195px" width="290px" square />
+            <q-skeleton height="170px" width="290px" square />
             <q-card-section>
               <q-skeleton type="text" class="text-subtitle1" />
               <q-skeleton
@@ -22,7 +22,7 @@
         </div>
         <div v-else>
           <q-card class="my-card">
-            <img :src="item.image" />
+            <img :src="item.image" style="height: 170px" />
             <q-card-section class="row justify-between">
               <div class="text-subtitle2">{{ item.name }}</div>
               <div class="text-subtitle2">${{ item.price }}</div>

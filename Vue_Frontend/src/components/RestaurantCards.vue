@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container q-pa-md">
     <h2 class="text-weight-thin q-mx-lg q-px-sm">Restaurants</h2>
     <div class="row">
       <div
