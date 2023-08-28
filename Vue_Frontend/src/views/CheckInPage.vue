@@ -47,7 +47,7 @@
         </q-form>
       </div>
       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <q-card class="q-mx-sm">
+        <!-- <q-card class="q-mx-sm">
           <div class="text-center">
             <h5 class="mb-0 text-white bg-primary rounded-borders">Summary</h5>
           </div>
@@ -107,12 +107,16 @@
               </p>
             </div>
           </div>
-        </q-card>
-        <img
+        </q-card> -->
+
+        <div style="width: 100%; height: 70%">
+          <LeefletMap />
+        </div>
+        <!-- <img
           src="../assets/foodpandagif.gif"
           alt="image"
           style="width: 50%; margin-left: 25%"
-        />
+        /> -->
       </div>
     </div>
   </div>
@@ -122,6 +126,7 @@
 import { useQuasar } from "quasar";
 import { useAddCartStore } from "../stores/AddCartStore";
 import axios from "axios";
+import { ref } from "vue";
 const Total = useAddCartStore();
 // =====================================
 import { useCheckInStore } from "../stores/CheckInStore";
@@ -129,11 +134,14 @@ import { useDetailStore } from "../stores/userDetailStore";
 const user = useDetailStore();
 const data = useCheckInStore();
 const $q = useQuasar();
+//=======================================
+import LeefletMap from "../components/LeefletMap.vue";
 
 data.country_is();
 const country = data.countrydata;
 const state = data.statedata;
 const city = data.citydata;
+// const onSearchInput = ref();
 
 const sendDetails = async () => {
   const orderData = {
@@ -146,14 +154,11 @@ const sendDetails = async () => {
     total: Total.Total,
     products: Total.getCartItems,
   };
-  console.log(orderData);
   const token = localStorage.getItem("_token");
   const headers = {
     "Content-Type": "application/json",
     Authorization: `bearer ${token}`,
   };
-  console.log(orderData);
-
   try {
     const response = await axios.post(
       "http://localhost:4000/api/createOrder",

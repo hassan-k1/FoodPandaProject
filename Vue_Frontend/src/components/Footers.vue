@@ -34,5 +34,3 @@
     </section>
   </q-footer>
 </template>
-
-<style scoped></style>
