@@ -1,7 +1,7 @@
 <template>
-  <div class="q-px-md checkContainer">
+  <div class="checkContainer">
     <h5 class="text-center text-primary text-weight-bold">Order Detail Page</h5>
-    <div class="row">
+    <div class="row q-pa-md">
       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <q-form>
           <q-input
@@ -47,9 +47,9 @@
         </q-form>
       </div>
       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <!-- <q-card class="q-mx-sm">
+        <q-card class="q-mx-sm">
           <div class="text-center">
-            <h5 class="mb-0 text-white bg-primary rounded-borders">Summary</h5>
+            <h5 class="text-white bg-primary rounded-borders">Summary</h5>
           </div>
           <div class="row">
             <div
@@ -107,17 +107,16 @@
               </p>
             </div>
           </div>
-        </q-card> -->
-
-        <div style="width: 100%; height: 70%">
-          <LeefletMap />
-        </div>
+        </q-card>
         <!-- <img
           src="../assets/foodpandagif.gif"
           alt="image"
           style="width: 50%; margin-left: 25%"
         /> -->
       </div>
+    </div>
+    <div style="width: 100%; height: 200px">
+      <LeefletMap />
     </div>
   </div>
 </template>
@@ -126,7 +125,6 @@
 import { useQuasar } from "quasar";
 import { useAddCartStore } from "../stores/AddCartStore";
 import axios from "axios";
-import { ref } from "vue";
 const Total = useAddCartStore();
 // =====================================
 import { useCheckInStore } from "../stores/CheckInStore";
@@ -141,7 +139,6 @@ data.country_is();
 const country = data.countrydata;
 const state = data.statedata;
 const city = data.citydata;
-// const onSearchInput = ref();
 
 const sendDetails = async () => {
   const orderData = {
@@ -182,7 +179,7 @@ const sendDetails = async () => {
 .checkContainer {
   box-shadow: 2px 2px 4px 4px #d8d8d8;
   width: 70%;
-  height: 50%;
+  height: 100%;
   margin: auto;
 }
 </style>

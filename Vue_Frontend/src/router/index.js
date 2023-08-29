@@ -52,7 +52,7 @@ const router = createRouter({
           component: Home,
         },
         {
-          path: "checkin",
+          path: "restaurant/checkin",
           name: "checkin",
           component: checkin,
         },

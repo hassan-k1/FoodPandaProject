@@ -20,6 +20,7 @@ export const useCheckInStore = defineStore("checkInStore", {
     countrydata: (state) => state.listItem,
     statedata: (state) => state.stateList,
     citydata: (state) => state.cityList,
+    getSelectCountry: (state) => state.selectCountry,
   },
   actions: {
     async country_is() {
